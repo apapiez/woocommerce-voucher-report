@@ -1,16 +1,16 @@
-<anvil-form layout="Minimal_Theme_2.Layouts.BaseLayout">
-    <anvil-block slot="actions">
-        <anvil-component type="Link" name="home_link" prop:text="Home"></anvil-component>
-    </anvil-block>
-    <anvil-block slot="content">
-        <anvil-component type="ColumnPanel" name="column_panel_1" prop:role="card">
-            <anvil-component type="DropDown" name="voucher_dropdown" prop:include_placeholder="true" prop:placeholder="Choose a voucher"></anvil-component>
-            <anvil-component type="Label" name="unmatched_label" prop:role="notice-banner" prop:visible="false"></anvil-component>
-            <anvil-component type="Label" name="monthly_heading" prop:role="eyebrow" prop:text="First-time users by month"></anvil-component>
-            <anvil-component type="RepeatingPanel" name="monthly_panel" prop:item_template="Minimal_Theme_2.MonthlyCountRow"></anvil-component>
-        </anvil-component>
-    </anvil-block>
-    <anvil-block slot="title">
-        <anvil-component type="Label" name="label_1" prop:role="h1" prop:text="Voucher report"></anvil-component>
-    </anvil-block>
+<anvil-form layout="Woocommerce_Coupon_Analysis.Layouts.BaseLayout">
+  <anvil-block slot="actions">
+    <anvil-component type="Link" name="home_link" prop:text="Home"></anvil-component>
+  </anvil-block>
+  <anvil-block slot="content">
+    <anvil-component type="ColumnPanel" name="column_panel_1" prop:role="card">
+      <anvil-component type="DropDown" name="voucher_dropdown" prop:include_placeholder="true" prop:placeholder="Choose a voucher"></anvil-component>
+      <anvil-component type="Label" name="unmatched_label" prop:role="notice-banner" prop:visible="false"></anvil-component>
+      <anvil-component type="Label" name="monthly_heading" prop:role="eyebrow" prop:text="First-time users by month"></anvil-component>
+      <anvil-component type="RepeatingPanel" name="monthly_panel" prop:item_template="Woocommerce_Coupon_Analysis.MonthlyCountRow"></anvil-component>
+    </anvil-component>
+  </anvil-block>
+  <anvil-block slot="title">
+    <anvil-component type="Label" name="label_1" prop:role="h1" prop:text="Voucher report"></anvil-component>
+  </anvil-block>
 </anvil-form>

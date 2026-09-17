@@ -65,8 +65,9 @@ db_schema:
       type: number
     server: full
     title: Users
-name: Minimal Theme 2
-package_name: Minimal_Theme_2
+metadata: {title: Woocommerce Coupon Analysis}
+name: Woocommerce Coupon Analysis
+package_name: Woocommerce_Coupon_Analysis
 runtime_options:
   client_version: '3'
   server_spec: {base: python310-minimal}
