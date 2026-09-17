@@ -21,6 +21,8 @@ roles:
   name: h1
 - components: [Label]
   name: lede
+- components: [Label]
+  name: notice-banner
 - components: [ColumnPanel]
   display_in_toolbox: true
   name: card

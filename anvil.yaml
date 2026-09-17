@@ -1,4 +1,39 @@
 allow_embedding: false
+db_schema:
+  orders:
+    client: none
+    columns:
+    - admin_ui: {order: 0}
+      name: order_number
+      type: string
+    - admin_ui: {order: 1}
+      name: order_date
+      type: datetime
+    - admin_ui: {order: 2}
+      name: status
+      type: string
+    - admin_ui: {order: 3}
+      name: total
+      type: number
+    - admin_ui: {order: 4}
+      name: coupons
+      type: simpleObject
+    server: full
+    title: Orders
+  sage_order_accounts:
+    client: none
+    columns:
+    - admin_ui: {order: 0}
+      name: order_number
+      type: string
+    - admin_ui: {order: 1}
+      name: account_code
+      type: string
+    - admin_ui: {order: 2}
+      name: customer_name
+      type: string
+    server: full
+    title: Sage Order Accounts
 name: Minimal Theme 2
 package_name: Minimal_Theme_2
 runtime_options:
@@ -9,4 +44,7 @@ services:
 - client_config: {enable_v2: true}
   server_config: {}
   source: /runtime/services/tables.yml
+- server_config: {}
+  source: /runtime/services/uplink.yml
 startup: {module: Form1, type: form}
+uplink_visible: true

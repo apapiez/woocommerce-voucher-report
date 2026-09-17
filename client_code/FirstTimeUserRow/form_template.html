@@ -1,0 +1,4 @@
+<anvil-form container="ColumnPanel">
+  <anvil-component type="Label" name="name_label" bind:text="self.item['customer_name'] + ' (' + self.item['account_code'] + ')'"></anvil-component>
+  <anvil-component type="Label" name="detail_label" prop:role="eyebrow" bind:text="'First order ' + self.item['first_order_number'] + ' on ' + self.item['first_order_date']"></anvil-component>
+</anvil-form>
