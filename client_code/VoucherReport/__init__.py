@@ -18,13 +18,11 @@ class VoucherReport(VoucherReportTemplate):
     voucher_code = self.voucher_dropdown.selected_value
     if not voucher_code:
       self.monthly_panel.items = []
-      self.users_panel.items = []
       self.unmatched_label.visible = False
       return
 
     report = anvil.server.call("get_first_time_report", voucher_code)
     self.monthly_panel.items = report["monthly"]
-    self.users_panel.items = report["users"]
 
     unmatched = report["unmatched_orders"]
     if unmatched:

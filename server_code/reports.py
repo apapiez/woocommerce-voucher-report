@@ -4,6 +4,8 @@ from datetime import datetime
 import anvil.server
 from anvil.tables import app_tables
 
+PAYOUT_PER_FIRST_TIME_USER = 3.00
+
 
 @anvil.server.callable
 def get_voucher_options():
@@ -44,26 +46,29 @@ def get_first_time_report(voucher_code):
                 "first_order_date": order["order_date"],
             }
 
-    monthly_counts = defaultdict(int)
+    monthly_groups = defaultdict(list)
     for info in first_seen.values():
-        monthly_counts[info["first_order_date"].strftime("%Y-%m")] += 1
+        monthly_groups[info["first_order_date"].strftime("%Y-%m")].append(info)
 
-    monthly = [
-        {
-            "month": month,
-            "month_label": datetime.strptime(month, "%Y-%m").strftime("%B %Y"),
-            "count": count,
-        }
-        for month, count in sorted(monthly_counts.items())
-    ]
+    monthly = []
+    for month in sorted(monthly_groups):
+        users = sorted(monthly_groups[month], key=lambda info: info["first_order_date"])
+        for info in users:
+            info["first_order_date"] = info["first_order_date"].strftime("%d %b %Y")
 
-    users = sorted(first_seen.values(), key=lambda info: info["first_order_date"])
-    for info in users:
-        info["month"] = info["first_order_date"].strftime("%Y-%m")
-        info["first_order_date"] = info["first_order_date"].strftime("%d %b %Y")
+        count = len(users)
+        total_owing = count * PAYOUT_PER_FIRST_TIME_USER
+        monthly.append(
+            {
+                "month": month,
+                "month_label": datetime.strptime(month, "%Y-%m").strftime("%B %Y"),
+                "count": count,
+                "total_owing_display": f"£{total_owing:.2f}",
+                "users": users,
+            }
+        )
 
     return {
         "monthly": monthly,
-        "users": users,
         "unmatched_orders": sorted(set(unmatched_orders)),
     }

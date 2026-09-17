@@ -1,3 +1,5 @@
 <anvil-form container="ColumnPanel">
-  <anvil-component type="Label" name="month_label" bind:text="self.item['month_label'] + ': ' + str(self.item['count']) + ' first-time user(s)'"></anvil-component>
+  <anvil-component type="Label" name="month_label" prop:role="eyebrow" bind:text="self.item['month_label']"></anvil-component>
+  <anvil-component type="RepeatingPanel" name="users_panel" prop:item_template="Minimal_Theme_2.FirstTimeUserRow" bind:items="self.item['users']"></anvil-component>
+  <anvil-component type="Label" name="total_label" bind:text="'Total owing: ' + self.item['total_owing_display']"></anvil-component>
 </anvil-form>
