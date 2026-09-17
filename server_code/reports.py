@@ -7,7 +7,7 @@ from anvil.tables import app_tables
 PAYOUT_PER_FIRST_TIME_USER = 3.00
 
 
-@anvil.server.callable
+@anvil.server.callable(require_user=True)
 def get_voucher_options():
     codes = set()
     for order in app_tables.orders.search():
@@ -17,7 +17,7 @@ def get_voucher_options():
     return sorted(codes, key=str.lower)
 
 
-@anvil.server.callable
+@anvil.server.callable(require_user=True)
 def get_first_time_report(voucher_code):
     code_lower = voucher_code.strip().lower()
     sage_lookup = {row["order_number"]: row for row in app_tables.sage_order_accounts.search()}

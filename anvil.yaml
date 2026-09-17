@@ -34,6 +34,29 @@ db_schema:
       type: string
     server: full
     title: Sage Order Accounts
+  users:
+    client: none
+    columns:
+    - admin_ui: {order: 0}
+      name: email
+      type: string
+    - admin_ui: {order: 1}
+      name: enabled
+      type: bool
+    - admin_ui: {order: 2}
+      name: signed_up
+      type: datetime
+    - admin_ui: {order: 3}
+      name: password_hash
+      type: string
+    - admin_ui: {order: 4}
+      name: confirmed_email
+      type: bool
+    - admin_ui: {order: 5}
+      name: remembered_logins
+      type: simpleObject
+    server: full
+    title: Users
 name: Minimal Theme 2
 package_name: Minimal_Theme_2
 runtime_options:
@@ -46,5 +69,8 @@ services:
   source: /runtime/services/tables.yml
 - server_config: {}
   source: /runtime/services/uplink.yml
+- client_config: {allow_remember_me: true, allow_signup: false, confirm_email: false, remember_me_days: 30, require_secure_passwords: true, use_email: true}
+  server_config: {user_table: users}
+  source: /runtime/services/anvil/users.yml
 startup: {module: Form1, type: form}
 uplink_visible: true

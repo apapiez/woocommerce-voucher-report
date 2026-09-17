@@ -10,7 +10,7 @@ DATE_FORMAT = "%d/%m/%Y %H:%M"
 REQUIRED_COLUMNS = {"Order", "Date", "Status", "Coupons Used", "Total"}
 
 
-@anvil.server.callable
+@anvil.server.callable(require_user=True)
 def import_orders_csv(csv_file):
     text = csv_file.get_bytes().decode("utf-8-sig")
     reader = csv.DictReader(io.StringIO(text))
