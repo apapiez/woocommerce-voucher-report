@@ -1,5 +1,6 @@
 """Run this script locally (not part of the Anvil app) to sync order-number ->
-Sage account/customer-name lookups into the app.
+Sage account/customer-name lookups into the app, from a Sage CSV export with
+columns: Date, Name, A/C, Customer Order No.
 
 Setup:
   pip install anvil-uplink
@@ -7,10 +8,12 @@ Setup:
   or in the ANVIL_UPLINK_KEY environment variable.
 
 Usage:
-  python sync_accounts.py
+  python sync_accounts.py path/to/sage_export.csv
 """
 
+import csv
 import os
+import sys
 
 import anvil.server
 
@@ -18,14 +21,20 @@ UPLINK_KEY = os.environ.get("ANVIL_UPLINK_KEY", "")
 BATCH_SIZE = 500
 
 
-def fetch_accounts_from_sage():
-    """Return an iterable of dicts: {order_number, account_code, customer_name}.
-
-    Replace this with your real Sage extraction (ODBC query, export file read,
-    Sage API call, etc.). One row per WooCommerce order number that Sage can
-    identify, mapped to the account that placed it.
-    """
-    raise NotImplementedError("Fill in fetch_accounts_from_sage() for your Sage setup")
+def read_accounts_csv(path):
+    with open(path, newline="", encoding="utf-8-sig") as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            order_number = (row.get("Customer Order No") or "").strip()
+            account_code = (row.get("A/C") or "").strip()
+            customer_name = (row.get("Name") or "").strip()
+            if not order_number or not account_code:
+                continue
+            yield {
+                "order_number": order_number,
+                "account_code": account_code,
+                "customer_name": customer_name,
+            }
 
 
 def chunks(records, size):
@@ -34,9 +43,12 @@ def chunks(records, size):
 
 
 def main():
+    if len(sys.argv) != 2:
+        raise SystemExit("Usage: python sync_accounts.py path/to/sage_export.csv")
+
     anvil.server.connect(UPLINK_KEY)
 
-    records = list(fetch_accounts_from_sage())
+    records = list(read_accounts_csv(sys.argv[1]))
     created = updated = 0
     skipped = []
 
