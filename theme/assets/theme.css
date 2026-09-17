@@ -153,6 +153,22 @@ a:focus {
   background: var(--blank-surface);
 }
 
+.month-card {
+  padding: 20px;
+  border: 1px solid var(--blank-border);
+  border-radius: 8px;
+  background: var(--blank-surface);
+  margin-bottom: 16px;
+}
+
+.month-table-scroll {
+  max-height: 220px;
+  overflow-y: auto;
+  border: 1px solid var(--blank-border);
+  border-radius: 6px;
+  margin: 8px 0;
+}
+
 input.anvil-text-box,
 textarea.anvil-text-area,
 .anvil-dropdown select,

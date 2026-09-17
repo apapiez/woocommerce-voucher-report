@@ -29,9 +29,12 @@ def get_first_time_report(voucher_code):
     ]
     matching_orders.sort(key=lambda order: order["order_date"])
 
+    total_orders_by_month = defaultdict(int)
     first_seen = {}
     unmatched_orders = []
     for order in matching_orders:
+        total_orders_by_month[order["order_date"].strftime("%Y-%m")] += 1
+
         account = sage_lookup.get(order["order_number"])
         if account is None:
             unmatched_orders.append(order["order_number"])
@@ -46,23 +49,24 @@ def get_first_time_report(voucher_code):
                 "first_order_date": order["order_date"],
             }
 
-    monthly_groups = defaultdict(list)
+    first_time_by_month = defaultdict(list)
     for info in first_seen.values():
-        monthly_groups[info["first_order_date"].strftime("%Y-%m")].append(info)
+        first_time_by_month[info["first_order_date"].strftime("%Y-%m")].append(info)
 
     monthly = []
-    for month in sorted(monthly_groups):
-        users = sorted(monthly_groups[month], key=lambda info: info["first_order_date"])
+    for month in sorted(total_orders_by_month):
+        users = sorted(first_time_by_month.get(month, []), key=lambda info: info["first_order_date"])
         for info in users:
             info["first_order_date"] = info["first_order_date"].strftime("%d %b %Y")
 
-        count = len(users)
-        total_owing = count * PAYOUT_PER_FIRST_TIME_USER
+        first_time_count = len(users)
+        total_owing = first_time_count * PAYOUT_PER_FIRST_TIME_USER
         monthly.append(
             {
                 "month": month,
                 "month_label": datetime.strptime(month, "%Y-%m").strftime("%B %Y"),
-                "count": count,
+                "total_orders": total_orders_by_month[month],
+                "first_time_count": first_time_count,
                 "total_owing_display": f"£{total_owing:.2f}",
                 "users": users,
             }
