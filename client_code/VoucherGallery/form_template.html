@@ -1,0 +1,11 @@
+<anvil-form layout="Woocommerce_Coupon_Analysis.Layouts.BaseLayout">
+  <anvil-block slot="content">
+    <anvil-component type="ColumnPanel" name="column_panel_1" prop:role="card">
+      <anvil-component type="Label" name="empty_label" prop:role="lede" prop:text="No vouchers yet — import an orders CSV first." prop:visible="false"></anvil-component>
+      <anvil-component type="RepeatingPanel" name="gallery_panel" prop:item_template="Woocommerce_Coupon_Analysis.VoucherCard" prop:role="voucher-grid"></anvil-component>
+    </anvil-component>
+  </anvil-block>
+  <anvil-block slot="title">
+    <anvil-component type="Label" name="label_1" prop:role="h1" prop:text="Vouchers"></anvil-component>
+  </anvil-block>
+</anvil-form>

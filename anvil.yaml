@@ -89,5 +89,5 @@ services:
           <p>This link will expire in ten minutes.</p>
     user_table: users
   source: /runtime/services/anvil/users.yml
-startup: {module: Form1, type: form}
+startup: {module: VoucherGallery, type: form}
 uplink_visible: true

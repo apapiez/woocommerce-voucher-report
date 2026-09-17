@@ -12,6 +12,18 @@ color_scheme:
   - {color: '#f9fbfc', name: Control Background Hover}
   - {color: '#eef2f6', name: Control Disabled}
   - {color: '#eef5f7', name: Surface Muted}
+  - {color: '#10151a', name: Dark Background}
+  - {color: '#1b232b', name: Dark Surface}
+  - {color: '#e8edf2', name: Dark Text}
+  - {color: '#93a1ae', name: Dark Muted}
+  - {color: '#2c3a45', name: Dark Border}
+  - {color: '#5ec2e8', name: Dark Primary}
+  - {color: '#8ad6f2', name: Dark Primary Dark}
+  - {color: 'rgba(94, 194, 232, 0.35)', name: Dark Focus Ring}
+  - {color: '#1f2830', name: Dark Control Background}
+  - {color: '#26323c', name: Dark Control Background Hover}
+  - {color: '#232d36', name: Dark Control Disabled}
+  - {color: '#202a33', name: Dark Surface Muted}
 roles:
 - components: [Button]
   name: secondary-button
@@ -23,6 +35,12 @@ roles:
   name: lede
 - components: [Label]
   name: notice-banner
+- components: [Label]
+  name: voucher-card-title
+- components: [Label]
+  name: month-card-title
+- components: [RepeatingPanel]
+  name: voucher-grid
 - components: [ColumnPanel]
   display_in_toolbox: true
   name: card

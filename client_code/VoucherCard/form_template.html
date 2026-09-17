@@ -1,0 +1,7 @@
+<div class="voucher-card" anvil:on-dom:click="self.card_click">
+  <anvil-component type="Label" name="voucher_label" prop:role="voucher-card-title" bind:text="self.item['voucher_code']"></anvil-component>
+  <anvil-component type="Label" name="total_purchases_label" bind:text="'Total purchases: ' + str(self.item['total_purchases'])"></anvil-component>
+  <anvil-component type="Label" name="total_payable_label" bind:text="'Total payable: ' + self.item['total_payable_display']"></anvil-component>
+  <anvil-component type="Label" name="last_month_label" bind:text="'Payable last month: ' + self.item['payable_last_month_display']"></anvil-component>
+  <anvil-component type="Label" name="this_month_label" bind:text="'Payable this month: ' + self.item['payable_this_month_display']"></anvil-component>
+</div>

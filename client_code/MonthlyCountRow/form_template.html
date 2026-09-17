@@ -1,8 +1,13 @@
 <div class="month-card">
-  <anvil-component type="Label" name="month_label" prop:role="eyebrow" bind:text="self.item['month_label']"></anvil-component>
-  <anvil-component type="Plot" name="chart"></anvil-component>
-  <div class="month-table-scroll">
-    <anvil-component type="RepeatingPanel" name="users_panel" prop:item_template="Woocommerce_Coupon_Analysis.FirstTimeUserRow" bind:items="self.item['users']"></anvil-component>
+  <div class="month-card-header" anvil:on-dom:click="self.header_click">
+    <anvil-component type="Label" name="month_label" prop:role="month-card-title" bind:text="self.item['month_label']"></anvil-component>
+    <anvil-component type="Label" name="caret_label" prop:role="month-card-title" prop:text="▸"></anvil-component>
   </div>
-  <anvil-component type="Label" name="total_label" bind:text="'Total owing: ' + self.item['total_owing_display']"></anvil-component>
+  <anvil-component type="ColumnPanel" name="details_panel" prop:visible="false">
+    <anvil-component type="Plot" name="chart"></anvil-component>
+    <div class="month-table-scroll">
+      <anvil-component type="RepeatingPanel" name="users_panel" prop:item_template="Woocommerce_Coupon_Analysis.FirstTimeUserRow" bind:items="self.item['users']"></anvil-component>
+    </div>
+    <anvil-component type="Label" name="total_label" bind:text="'Total owing: ' + self.item['total_owing_display']"></anvil-component>
+  </anvil-component>
 </div>

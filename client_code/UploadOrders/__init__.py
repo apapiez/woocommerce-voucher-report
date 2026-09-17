@@ -7,10 +7,6 @@ class UploadOrders(UploadOrdersTemplate):
   def __init__(self, **properties):
     super().__init__(**properties)
 
-  @handle("home_link", "click")
-  def home_link_click(self, **event_args):
-    open_form("Form1")
-
   @handle("file_loader", "change")
   def file_loader_change(self, file, **event_args):
     self.import_button.enabled = file is not None
